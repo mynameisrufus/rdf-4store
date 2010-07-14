@@ -2,16 +2,15 @@ $:.unshift File.dirname(__FILE__) + "/../lib/"
 
 require 'rdf'
 require 'rdf/spec/repository'
-require 'rdf/myrepository'
+require 'rdf/4store'
 
-describe RDF::MyRepository do
-  context "My New RDF Repository" do
+describe RDF::FourStore::Repository do
+  context "4store" do
     before :each do
-      @repository = RDF::MyRepository.new() # TODO: Do you need constructor arguments?
+      @repository = RDF::FourStore::Repository.new('http://localhost:10008')
     end
    
     after :each do
-      #TODO: Anything you need to clean up a test goes here.
       @repository.clear
     end
 
