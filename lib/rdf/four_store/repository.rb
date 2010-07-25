@@ -50,6 +50,38 @@ module RDF::FourStore
     end
 
     ##
+    # Loads RDF statements from the given file or URL into `self`.
+    #
+    # @see RDF::Mutable#load
+    # @param  [String, #to_s]          filename
+    # @param  [Hash{Symbol => Object}] options
+    # @return [void]
+    def load(filename, options = {})
+      return super(filename, options) if /^https?:\/\//.match(filename)
+
+      uri = nil
+
+      if options[:context]
+        uri = @dataURI + options[:context]
+      else
+        uri = @dataURI + 'file://' + File.expand_path(filename)
+      end
+
+      uri = URI.parse(uri)
+      content = open(filename).read
+      begin
+        req = Net::HTTP::Put.new(uri.path)
+        Net::HTTP.start(uri.host, uri.port) do |http|
+          http.request(req, content)
+        end
+      rescue Errno::ECONNREFUSED, Errno::ECONNRESET, TimeoutError
+        retry
+      end
+    end
+
+    alias_method :load!, :load
+
+    ##
     # Returns the number of statements in this repository.
     # @see RDF::Repository#count
     # @return [Integer]
