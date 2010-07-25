@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+function makeRed(element_id) {
+  document.getElementById(element_id).style.background = '#C40D0D';
+  document.getElementById(element_id).style.color = '#FFFFFF';
+}
+
+function makeYellow(element_id) {
+  if (element_id == "rspec-header" && document.getElementById(element_id).style.background != '#C40D0D')
+  {
+    document.getElementById(element_id).style.background = '#FAF834';
+    document.getElementById(element_id).style.color = '#000000';
+  }
+  else
+  {
+    document.getElementById(element_id).style.background = '#FAF834';
+    document.getElementById(element_id).style.color = '#000000';
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#summary {
+  margin: 0; padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+  top: 0px;
+  right: 0px;
+  float:right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd.spec.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.spec.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+dd.spec.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.spec.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&nbsp;</p>
+    <p id="duration">&nbsp;</p>
+  </div>
+</div>
+
+<div class="results">
+<div class="example_group">
+  <dl>
+  <dt id="example_group_1">RDF::FourStore::Repository 4store when counting statements when counting items</dt>
+    <script type="text/javascript">moveProgressBar('0.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #empty?</span></dd>
+    <script type="text/javascript">moveProgressBar('1.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #count and #size</span></dd>
+    <script type="text/javascript">moveProgressBar('2.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #empty?</span></dd>
+    <script type="text/javascript">moveProgressBar('2.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #count and #size</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_2">RDF::FourStore::Repository 4store when enumerating statements when counting statements</dt>
+    <script type="text/javascript">moveProgressBar('3.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #empty?</span></dd>
+    <script type="text/javascript">moveProgressBar('4.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #count and #size</span></dd>
+    <script type="text/javascript">moveProgressBar('4.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #empty?</span></dd>
+    <script type="text/javascript">moveProgressBar('5.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #count and #size</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_3">RDF::FourStore::Repository 4store when enumerating statements when enumerating statements</dt>
+    <script type="text/javascript">moveProgressBar('6.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #statements</span></dd>
+    <script type="text/javascript">moveProgressBar('6.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_statement?</span></dd>
+    <script type="text/javascript">moveProgressBar('7.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_statement</span></dd>
+    <script type="text/javascript">moveProgressBar('8.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_statement</span></dd>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('example_group_3');</script>
+    <script type="text/javascript">moveProgressBar('8.7');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #statements</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>expected: 47,
+     got: 0 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('9.4');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #has_statement?</span>
+      <div class="failure" id="failure_2">
+        <div class="message"><pre>expected true to be false</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('10.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #each_statement</span></dd>
+    <script type="text/javascript">moveProgressBar('10.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_statement</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_4">RDF::FourStore::Repository 4store when enumerating statements when enumerating triples</dt>
+    <script type="text/javascript">moveProgressBar('11.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #triples</span></dd>
+    <script type="text/javascript">moveProgressBar('12.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_triple?</span></dd>
+    <script type="text/javascript">moveProgressBar('12.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_triple</span></dd>
+    <script type="text/javascript">moveProgressBar('13.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_triple</span></dd>
+    <script type="text/javascript">makeRed('example_group_4');</script>
+    <script type="text/javascript">moveProgressBar('14.1');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #triples</span>
+      <div class="failure" id="failure_3">
+        <div class="message"><pre>expected: 47,
+     got: 0 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('14.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #has_triple?</span></dd>
+    <script type="text/javascript">moveProgressBar('15.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #each_triple</span></dd>
+    <script type="text/javascript">moveProgressBar('16.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_triple</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_5">RDF::FourStore::Repository 4store when enumerating statements when enumerating quads</dt>
+    <script type="text/javascript">moveProgressBar('16.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #quads</span></dd>
+    <script type="text/javascript">moveProgressBar('17.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_quad?</span></dd>
+    <script type="text/javascript">moveProgressBar('18.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_quad</span></dd>
+    <script type="text/javascript">moveProgressBar('18.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_quad</span></dd>
+    <script type="text/javascript">makeRed('example_group_5');</script>
+    <script type="text/javascript">moveProgressBar('19.5');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #quads</span>
+      <div class="failure" id="failure_4">
+        <div class="message"><pre>expected: 47,
+     got: 0 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('20.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #has_quad?</span></dd>
+    <script type="text/javascript">moveProgressBar('20.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #each_quad</span></dd>
+    <script type="text/javascript">moveProgressBar('21.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_quad</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_6">RDF::FourStore::Repository 4store when enumerating statements when enumerating subjects</dt>
+    <script type="text/javascript">moveProgressBar('22.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #subjects</span></dd>
+    <script type="text/javascript">moveProgressBar('22.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_subject?</span></dd>
+    <script type="text/javascript">moveProgressBar('23.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_subject</span></dd>
+    <script type="text/javascript">moveProgressBar('24.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_subject</span></dd>
+    <script type="text/javascript">moveProgressBar('25.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #subjects</span></dd>
+    <script type="text/javascript">makeRed('example_group_6');</script>
+    <script type="text/javascript">moveProgressBar('25.6');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #has_subject?</span>
+      <div class="failure" id="failure_5">
+        <div class="message"><pre>expected true to be false</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('26.3');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #each_subject</span>
+      <div class="failure" id="failure_6">
+        <div class="message"><pre>expected: 6,
+     got: 12 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('27.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_subject</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_7">RDF::FourStore::Repository 4store when enumerating statements when enumerating predicates</dt>
+    <script type="text/javascript">moveProgressBar('27.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #predicates</span></dd>
+    <script type="text/javascript">moveProgressBar('28.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_predicate?</span></dd>
+    <script type="text/javascript">moveProgressBar('29.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_predicate</span></dd>
+    <script type="text/javascript">moveProgressBar('29.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_predicate</span></dd>
+    <script type="text/javascript">moveProgressBar('30.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #predicates</span></dd>
+    <script type="text/javascript">makeRed('example_group_7');</script>
+    <script type="text/javascript">moveProgressBar('31.0');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #has_predicate?</span>
+      <div class="failure" id="failure_7">
+        <div class="message"><pre>expected true to be false</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('31.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #each_predicate</span></dd>
+    <script type="text/javascript">moveProgressBar('32.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_predicate</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_8">RDF::FourStore::Repository 4store when enumerating statements when enumerating objects</dt>
+    <script type="text/javascript">moveProgressBar('33.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #objects</span></dd>
+    <script type="text/javascript">moveProgressBar('33.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_object?</span></dd>
+    <script type="text/javascript">moveProgressBar('34.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_object</span></dd>
+    <script type="text/javascript">moveProgressBar('35.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_object</span></dd>
+    <script type="text/javascript">moveProgressBar('35.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #objects</span></dd>
+    <script type="text/javascript">makeRed('example_group_8');</script>
+    <script type="text/javascript">moveProgressBar('36.4');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #has_object?</span>
+      <div class="failure" id="failure_8">
+        <div class="message"><pre>expected true to be false</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('37.1');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #each_object</span>
+      <div class="failure" id="failure_9">
+        <div class="message"><pre>expected [#&lt;RDF::URI:0x811e9db8(http://xmlns.com/foaf/0.1/Person)&gt;, #&lt;RDF::URI:0x811e7d74(http://datagraph.org/bendiken/foaf)&gt;, #&lt;RDF::URI:0x811e5a04(http://ar.to/)&gt;, #&lt;RDF::URI:0x811e3a68(http://rubygems.org/gems/rdf)&gt;, #&lt;RDF::URI:0x811e07fc(mailto:arto.bendiken@gmail.com)&gt;, #&lt;RDF::Literal:0x811db530(&quot;a033f652c84a4d73b8c26d318c2395699dd2bdfb&quot;)&gt;, #&lt;RDF::Literal:0x811d6a7c(&quot;d0737cceb55eb7d740578d2db1bc0727e3ed49ce&quot;)&gt;, #&lt;RDF::Literal:0x811d4d48(&quot;Arto Bendiken&quot;)&gt;, #&lt;RDF::URI:0x811d1d60(http://datagraph.org/bhuga/foaf)&gt;, #&lt;RDF::URI:0x811d0224(http://bhuga.net/)&gt;, #&lt;RDF::URI:0x811cdeec(mailto:blavender@gmail.com)&gt;, #&lt;RDF::Literal:0x811ca724(&quot;dbf45f4ffbd27b67aa84f02a6a31c144727d10af&quot;)&gt;, #&lt;RDF::Literal:0x811c86e0(&quot;Ben Lavender&quot;)&gt;, #&lt;RDF::URI:0x811c6b88(http://ar.to/#self)&gt;, #&lt;RDF::URI:0x811bf760(http://blog.datagraph.org/)&gt;, #&lt;RDF::URI:0x811bdc5c(http://github.com/bendiken/rdf/issues)&gt;, #&lt;RDF::URI:0x811b7c54(http://dbpedia.org/resource/Resource_Description_Framework)&gt;, #&lt;RDF::URI:0x811b56d0(http://dbpedia.org/resource/Ruby_(programming_language))&gt;, #&lt;RDF::Literal:0x811b306c(&quot;2007-10-23&quot;)&gt;, #&lt;RDF::Literal:0x811b10d0(&quot;RDF.rb is a pure-Ruby library for working with Resource Description Framework (RDF) data.&quot;@en)&gt;, #&lt;RDF::URI:0x811aafb0(http://bhuga.net/#ben)&gt;, #&lt;RDF::URI:0x811a6160(http://rubyforge.org/projects/rdf/)&gt;, #&lt;RDF::Node:0x811a3450(_:genid1)&gt;, #&lt;RDF::Node:0x811a1de4(_:genid2)&gt;, #&lt;RDF::Node:0x811a02e0(_:genid3)&gt;, #&lt;RDF::URI:0x8119f1b4(http://rdf.rubyforge.org/)&gt;, #&lt;RDF::URI:0x8119d6cc(http://creativecommons.org/licenses/publicdomain/)&gt;, #&lt;RDF::Literal:0x81197c3c(&quot;RDF.rb&quot;)&gt;, #&lt;RDF::Literal:0x81192d60(&quot;Ruby&quot;)&gt;, #&lt;RDF::Literal:0x81190be8(&quot;A Ruby library for working with Resource Description Framework (RDF) data.&quot;@en)&gt;, #&lt;RDF::URI:0x8118dbac(http://datagraph.org/)&gt;, #&lt;RDF::URI:0x811880e4(http://usefulinc.com/ns/doap#Project)&gt;, #&lt;RDF::Literal:0x8118206c(&quot;c69f3255ff0639543cc5edfd8116eac8df16fab8&quot;)&gt;, #&lt;RDF::Literal:0x8117f730(&quot;Hellekin O. Wolf&quot;)&gt;, #&lt;RDF::Literal:0x8117ae04(&quot;f7653fc1ac0e82ebb32f092389bd5fc728eaae12&quot;)&gt;, #&lt;RDF::Literal:0x81179ac4(&quot;John Fieber&quot;)&gt;, #&lt;RDF::Literal:0x81174830(&quot;bedbbf2451e5beb38d59687c0460032aff92cd3c&quot;)&gt;, #&lt;RDF::Literal:0x81173800(&quot;Pius Uzamere&quot;)&gt;] to include #&lt;RDF::Literal:0x80aae2a8(&quot;A Ruby library for working with Resource Description Framework (RDF) data.&quot;@EN)&gt;</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('37.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_object</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_9">RDF::FourStore::Repository 4store when enumerating statements when enumerating contexts</dt>
+    <script type="text/javascript">moveProgressBar('38.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #contexts</span></dd>
+    <script type="text/javascript">moveProgressBar('39.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #has_context?</span></dd>
+    <script type="text/javascript">moveProgressBar('39.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_context</span></dd>
+    <script type="text/javascript">moveProgressBar('40.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_context</span></dd>
+    <script type="text/javascript">moveProgressBar('41.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #contexts</span></dd>
+    <script type="text/javascript">moveProgressBar('41.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #has_context?</span></dd>
+    <script type="text/javascript">moveProgressBar('42.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #each_context</span></dd>
+    <script type="text/javascript">moveProgressBar('43.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_context</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_10">RDF::FourStore::Repository 4store when enumerating statements when enumerating graphs</dt>
+    <script type="text/javascript">moveProgressBar('43.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #each_graph</span></dd>
+    <script type="text/javascript">moveProgressBar('44.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #enum_graph</span></dd>
+    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #each_graph</span></dd>
+    <script type="text/javascript">moveProgressBar('45.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should implement #enum_graph</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_11">RDF::FourStore::Repository 4store when enumerating statements when converting</dt>
+    <script type="text/javascript">moveProgressBar('46.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #to_hash</span></dd>
+    <script type="text/javascript">makeRed('example_group_11');</script>
+    <script type="text/javascript">moveProgressBar('47.2');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should implement #to_hash</span>
+      <div class="failure" id="failure_10">
+        <div class="message"><pre>expected: 12,
+     got: 0 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_12">RDF::FourStore::Repository 4store when querying statements</dt>
+    <script type="text/javascript">moveProgressBar('47.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #query</span></dd>
+    <script type="text/javascript">moveProgressBar('48.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #query_pattern</span></dd>
+    <script type="text/javascript">moveProgressBar('49.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #first</span></dd>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #first_subject</span></dd>
+    <script type="text/javascript">moveProgressBar('50.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #first_predicate</span></dd>
+    <script type="text/javascript">moveProgressBar('51.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #first_object</span></dd>
+    <script type="text/javascript">moveProgressBar('52.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #first_literal</span></dd>
+    <script type="text/javascript">moveProgressBar('52.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should respond to #first_value</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_13">RDF::FourStore::Repository 4store when querying statements#query when called</dt>
+    <script type="text/javascript">moveProgressBar('53.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should require an argument</span></dd>
+    <script type="text/javascript">moveProgressBar('54.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept a pattern argument</span></dd>
+    <script type="text/javascript">moveProgressBar('54.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept a statement argument</span></dd>
+    <script type="text/javascript">moveProgressBar('55.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept a triple argument</span></dd>
+    <script type="text/javascript">moveProgressBar('56.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept a quad argument</span></dd>
+    <script type="text/javascript">moveProgressBar('56.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept a hash argument</span></dd>
+    <script type="text/javascript">moveProgressBar('57.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not alter a given hash argument</span></dd>
+    <script type="text/javascript">moveProgressBar('58.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should reject other kinds of arguments</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_14">RDF::FourStore::Repository 4store when querying statements#query when called with a block</dt>
+    <script type="text/javascript">makeRed('example_group_14');</script>
+    <script type="text/javascript">moveProgressBar('58.7');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should yield statements</span>
+      <div class="failure" id="failure_11">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_15">RDF::FourStore::Repository 4store when querying statements#query when called without a block</dt>
+    <script type="text/javascript">moveProgressBar('59.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return an enumerator</span></dd>
+    <script type="text/javascript">moveProgressBar('60.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return an enumerable enumerator</span></dd>
+    <script type="text/javascript">moveProgressBar('60.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return a queryable enumerator</span></dd>
+    <script type="text/javascript">makeRed('example_group_15');</script>
+    <script type="text/javascript">moveProgressBar('61.4');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return statements</span>
+      <div class="failure" id="failure_12">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('62.1');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return the correct number of results for array queries</span>
+      <div class="failure" id="failure_13">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre>(eval):2:in `size'</pre></div>
+    <pre class="ruby"><code><span class="linenum">0</span><span class="comment"># Couldn't get snippet for (eval)</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('62.8');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return the correct number of results for hash queries</span>
+      <div class="failure" id="failure_14">
+        <div class="message"><pre>expected: 47,
+     got: 0 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_16">RDF::FourStore::Repository 4store when querying statements#query_pattern when called</dt>
+    <script type="text/javascript">moveProgressBar('63.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should require an argument</span></dd>
+    <script type="text/javascript">makeRed('example_group_16');</script>
+    <script type="text/javascript">moveProgressBar('64.1');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should call the given block</span>
+      <div class="failure" id="failure_15">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('64.8');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should yield statements</span>
+      <div class="failure" id="failure_16">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_17">RDF::FourStore::Repository 4store when querying statements#first</dt>
+    <script type="text/javascript">moveProgressBar('65.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be callable without a pattern</span></dd>
+    <script type="text/javascript">makeRed('example_group_17');</script>
+    <script type="text/javascript">moveProgressBar('66.2');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return the correct value when the pattern matches</span>
+      <div class="failure" id="failure_17">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('66.8');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return nil when the pattern fails to match anything</span>
+      <div class="failure" id="failure_18">
+        <div class="message"><pre>undefined method `each_statement' for []:Array</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('67.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when self is empty</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_18">RDF::FourStore::Repository 4store when querying statements#first_subject</dt>
+    <script type="text/javascript">makeRed('example_group_18');</script>
+    <script type="text/javascript">moveProgressBar('68.2');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should be callable without a pattern</span>
+      <div class="failure" id="failure_19">
+        <div class="message"><pre>undefined method `subject' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('68.9');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return the correct value when the pattern matches</span>
+      <div class="failure" id="failure_20">
+        <div class="message"><pre>undefined method `subject' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('69.5');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return nil when the pattern fails to match anything</span>
+      <div class="failure" id="failure_21">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('70.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when self is empty</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_19">RDF::FourStore::Repository 4store when querying statements#first_predicate</dt>
+    <script type="text/javascript">makeRed('example_group_19');</script>
+    <script type="text/javascript">moveProgressBar('70.9');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should be callable without a pattern</span>
+      <div class="failure" id="failure_22">
+        <div class="message"><pre>undefined method `predicate' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('71.6');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return the correct value when the pattern matches</span>
+      <div class="failure" id="failure_23">
+        <div class="message"><pre>undefined method `predicate' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('72.2');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return nil when the pattern fails to match anything</span>
+      <div class="failure" id="failure_24">
+        <div class="message"><pre>undefined method `each_statement' for []:Array</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('72.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when self is empty</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_20">RDF::FourStore::Repository 4store when querying statements#first_object</dt>
+    <script type="text/javascript">makeRed('example_group_20');</script>
+    <script type="text/javascript">moveProgressBar('73.6');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should be callable without a pattern</span>
+      <div class="failure" id="failure_25">
+        <div class="message"><pre>undefined method `object' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('74.3');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return the correct value when the pattern matches</span>
+      <div class="failure" id="failure_26">
+        <div class="message"><pre>undefined method `object' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('75.0');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return nil when the pattern fails to match anything</span>
+      <div class="failure" id="failure_27">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('75.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when self is empty</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_21">RDF::FourStore::Repository 4store when querying statements#first_literal</dt>
+    <script type="text/javascript">moveProgressBar('76.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be callable without a pattern</span></dd>
+    <script type="text/javascript">moveProgressBar('77.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return the correct value when the pattern matches</span></dd>
+    <script type="text/javascript">moveProgressBar('77.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when the pattern fails to match anything</span></dd>
+    <script type="text/javascript">moveProgressBar('78.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when self is empty</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_22">RDF::FourStore::Repository 4store when querying statements#first_value</dt>
+    <script type="text/javascript">makeRed('example_group_22');</script>
+    <script type="text/javascript">moveProgressBar('79.0');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should be callable without a pattern</span>
+      <div class="failure" id="failure_28">
+        <div class="message"><pre>undefined method `value' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('79.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return the correct value when the pattern matches</span></dd>
+    <script type="text/javascript">moveProgressBar('80.4');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should return nil when the pattern fails to match anything</span>
+      <div class="failure" id="failure_29">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('81.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should return nil when self is empty</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_23">RDF::FourStore::Repository 4store when updating</dt>
+    <script type="text/javascript">moveProgressBar('81.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be empty initially</span></dd>
+    <script type="text/javascript">moveProgressBar('82.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be readable</span></dd>
+    <script type="text/javascript">moveProgressBar('83.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be writable</span></dd>
+    <script type="text/javascript">moveProgressBar('83.7');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should be mutable</span></dd>
+    <script type="text/javascript">moveProgressBar('84.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support #load</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_24">RDF::FourStore::Repository 4store when updating#load</dt>
+    <script type="text/javascript">moveProgressBar('85.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should require an argument</span></dd>
+    <script type="text/javascript">moveProgressBar('85.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept a string filename argument</span></dd>
+    <script type="text/javascript">moveProgressBar('86.4');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should accept an optional hash argument</span></dd>
+    <script type="text/javascript">moveProgressBar('87.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should load statements</span></dd>
+    <script type="text/javascript">makeRed('example_group_24');</script>
+    <script type="text/javascript">moveProgressBar('87.8');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should load statements with a context override</span>
+      <div class="failure" id="failure_30">
+        <div class="message"><pre>expected #has_context?(#&lt;RDF::URI:0x810d44c4(http://example.org/context)&gt;) to return true, got false</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_25">RDF::FourStore::Repository 4store when updating when inserting statements</dt>
+    <script type="text/javascript">moveProgressBar('88.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support #insert</span></dd>
+    <script type="text/javascript">moveProgressBar('89.1');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not raise errors</span></dd>
+    <script type="text/javascript">moveProgressBar('89.8');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support inserting one statement at a time</span></dd>
+    <script type="text/javascript">moveProgressBar('90.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support inserting multiple statements at a time</span></dd>
+    <script type="text/javascript">moveProgressBar('91.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should insert statements successfully</span></dd>
+    <script type="text/javascript">makeRed('example_group_25');</script>
+    <script type="text/javascript">moveProgressBar('91.8');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should not insert a statement twice</span>
+      <div class="failure" id="failure_31">
+        <div class="message"><pre>expected: 1,
+     got: 2 (using ==)</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('92.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should treat statements with a different context as distinct</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_26">RDF::FourStore::Repository 4store when updating when deleting statements</dt>
+    <script type="text/javascript">moveProgressBar('93.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support #delete</span></dd>
+    <script type="text/javascript">moveProgressBar('93.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not raise errors</span></dd>
+    <script type="text/javascript">moveProgressBar('94.5');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support deleting one statement at a time</span></dd>
+    <script type="text/javascript">makeRed('example_group_26');</script>
+    <script type="text/javascript">moveProgressBar('95.2');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should support deleting multiple statements at a time</span>
+      <div class="failure" id="failure_32">
+        <div class="message"><pre>expected #&lt;RDF::Statement:0x81ea8170(&lt;http://rubygems.org/gems/rdf&gt; &lt;http://usefulinc.com/ns/doap#description&gt; RDF.rb is a pure-Ruby library for working with Resource Description Framework (RDF) data. .)&gt; to be false</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('95.9');</script>
+    <dd class="spec failed">
+      <span class="failed_spec_name">should support wildcard deletions</span>
+      <div class="failure" id="failure_33">
+        <div class="message"><pre>undefined method `each_statement' for nil:NilClass</pre></div>
+        <div class="backtrace"><pre></pre></div>
+    <pre class="ruby"><code><span class="linenum">-1</span><span class="comment"># Couldn't get snippet for </span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('96.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should only delete statements when the context matches</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_27">RDF::FourStore::Repository 4store when updating when clearing all statements</dt>
+    <script type="text/javascript">moveProgressBar('97.2');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support #clear</span></dd>
+  </dl>
+</div>
+<div class="example_group">
+  <dl>
+  <dt id="example_group_28">RDF::FourStore::Repository 4store as a durable repository</dt>
+    <script type="text/javascript">moveProgressBar('97.9');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support #durable?</span></dd>
+    <script type="text/javascript">moveProgressBar('98.6');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should support #nondurable?</span></dd>
+    <script type="text/javascript">moveProgressBar('99.3');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should not be both durable and nondurable</span></dd>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="spec passed"><span class="passed_spec_name">should save contents between instantiations</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>40.678173 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "148 examples, 33 failures";</script>
+</div>
+</div>
+</body>
+</html>

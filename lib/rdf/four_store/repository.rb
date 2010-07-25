@@ -98,6 +98,24 @@ module RDF::FourStore
     alias_method :length, :count
 
     ##
+    # Enumerates each RDF statement in this repository.
+    #
+    # @yield  [statement]
+    # @yieldparam [RDF::Statement] statement
+    # @return [Enumerator]
+    # @see    RDF::Repository#each
+    # @see    SPARQL::Client::Rpository#each
+    def each(&block)
+      unless block_given?
+        RDF::Enumerator.new(self, :each)
+      else
+        # TODO: check why @client.construct does not work here.
+        statements = @client.query("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }")
+        statements.each_statement(&block) if statements
+      end
+    end
+
+    ##
     # @private
     # @see RDF::Enumerable#has_triple?
     def has_triple?(triple)
