@@ -51,6 +51,7 @@ end
 
 task :clean do
   rm_f "*~"
+  rm_f "rdf-4store*.gem"
   rm_f "*/*~"
   rm_rf "report.html"
   rm_rf "coverage"
