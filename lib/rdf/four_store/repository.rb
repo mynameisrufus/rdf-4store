@@ -17,7 +17,7 @@ module RDF::FourStore
 
     attr_reader :endpointURI, :dataURI, :updateURI, :statusURI, :sizeURI
 
-    DEFAULT_CONTEXT = "local:".freeze
+    DEFAULT_CONTEXT = "default:".freeze
 
     ##
     # Constructor of RDF::FourStore::Repository
@@ -146,12 +146,10 @@ module RDF::FourStore
     # @see RDF::Mutable#insert_statement
     # @private
     def insert_statement(statement)
-      #TODO: save the given RDF::Statement.  Don't save duplicates.
-      #
-      #unless has_statement?(statement)
+      unless has_statement?(statement)
         dump = dump_statement(statement)
         post_data(dump, statement.context)
-      #end
+      end
     end
 
     ##
@@ -213,9 +211,14 @@ module RDF::FourStore
     end
 
     def query_pattern(pattern, &block)
-      context = pattern.context || DEFAULT_CONTEXT
+      context = pattern.context || nil
       str = pattern.to_s
-      q = "CONSTRUCT { #{str} } WHERE { GRAPH <#{context}> { #{str} } } "
+      q = ""
+      if context
+        q = "CONSTRUCT { #{str} } WHERE { GRAPH <#{context}> { #{str} } } "
+      else
+        q = "CONSTRUCT { #{str} } WHERE { #{str} } "
+      end
       result = @client.query(q)
       if result
         if block_given?
@@ -226,16 +229,33 @@ module RDF::FourStore
       end
     end
 
+    ##
+    # Makes a RDF string from a RDF Statement
+    #
+    # @param [RDF::Statement] statement
+    # @return [String]
     def dump_statement(statement)
       dump_statements([statement])
     end
-    
+
+    ##
+    # Makes a RDF string from RDF Statements
+    # Blank nodes are quoted to be used as constants in queries
+    #
+    # @param [Array(RDF::Statement)] statements
+    # @return [String]
+    # @see http://4store.org/presentations/bbc-2009-09-21/slides.html#(38)
     def dump_statements(statements)
       graph = RDF::Graph.new
       graph.insert_statements(statements)
-      RDF::Writer.for(:ntriples).dump(graph)
+      dump = RDF::Writer.for(:ntriples).dump(graph)
+      dump.gsub(/(_:\w+?) /, "<#{DEFAULT_CONTEXT}\\1> ")
     end
- 
+
+    ##
+    # Uploads a RDF string to a repository
+    # @param [String] content
+    # @param [String] context
     def post_data(content, context = nil)
       context ||= DEFAULT_CONTEXT
       uri = URI.parse(@dataURI)
@@ -252,13 +272,17 @@ module RDF::FourStore
       end
     end
 
-    def post_update(content, context = nil)
+    ##
+    # Sends a SPARUL query to update content in a repository
+    # @param [String] query
+    # @param [String] context
+    def post_update(query, context = nil)
       context ||= DEFAULT_CONTEXT
       uri = URI.parse(@updateURI)
 
       req = Net::HTTP::Post.new(uri.path)
       req.form_data = {
-        'update' => content,
+        'update' => query,
         'graph' => context,
         'content-type' => 'triples',
       }
