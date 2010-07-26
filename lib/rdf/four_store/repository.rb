@@ -133,11 +133,14 @@ module RDF::FourStore
     # @private
     # @see RDF::Enumerable#has_statement?
     def has_statement?(statement)
-      context = statement.context || DEFAULT_CONTEXT
+      context = statement.context
       dump = dump_statement(statement)
-      @client.query("ASK { GRAPH <#{context}> { #{dump} } } ")
+      if context
+        @client.query("ASK { GRAPH <#{context}> { #{dump} } } ")
+      else
+        @client.query("ASK { #{dump} } ")
+      end
     end
-
 
     ##
     # @see RDF::Mutable#insert_statement
@@ -184,11 +187,20 @@ module RDF::FourStore
     def query(pattern, &block)
       case pattern
       when RDF::Statement
-        h = {}
-        h[:subject] = pattern.subject || :s
-        h[:predicate] = pattern.predicate || :p
-        h[:object] = pattern.object || :o
-        h[:context] = pattern.context
+        h = {
+          :subject => pattern.subject || :s,
+          :predicate => pattern.predicate || :p,
+          :object => pattern.object || :o,
+          :context => pattern.context || nil
+        }
+        super(RDF::Query::Pattern.new(h), &block)
+      when Array
+        h = {
+          :subject => pattern[0] || :s,
+          :predicate => pattern[1] || :p,
+          :object => pattern[2]  || :o,
+          :context => pattern[3]  || nil
+        }
         super(RDF::Query::Pattern.new(h), &block)
       when Hash
         pattern[:subject] ||= :s
@@ -205,10 +217,12 @@ module RDF::FourStore
       str = pattern.to_s
       q = "CONSTRUCT { #{str} } WHERE { GRAPH <#{context}> { #{str} } } "
       result = @client.query(q)
-      if block_given?
-        result.each_statement(&block)
-      else
-        result
+      if result
+        if block_given?
+          result.each_statement(&block)
+        else
+          result
+        end
       end
     end
 
