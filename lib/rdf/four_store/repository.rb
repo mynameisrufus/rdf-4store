@@ -182,40 +182,44 @@ module RDF::FourStore
     # @yield  [statement]
     # @yieldparam [Statement]
     # @return [Enumerable<Statement>]
-    def query(pattern, &block)
-      case pattern
-      when RDF::Statement
-        h = {
-          :subject => pattern.subject || :s,
-          :predicate => pattern.predicate || :p,
-          :object => pattern.object || :o,
-          :context => pattern.context || nil
-        }
-        super(RDF::Query::Pattern.new(h), &block)
-      when Array
-        h = {
-          :subject => pattern[0] || :s,
-          :predicate => pattern[1] || :p,
-          :object => pattern[2]  || :o,
-          :context => pattern[3]  || nil
-        }
-        super(RDF::Query::Pattern.new(h), &block)
-      when Hash
-        pattern[:subject] ||= :s
-        pattern[:predicate] ||= :p
-        pattern[:object] ||= :o
-        super(RDF::Query::Pattern.new(pattern), &block)
-      else
-        super(pattern, &block)
-      end
-    end
+#     def query(pattern, &block)
+#       case pattern
+#       when RDF::Statement
+#         h = {
+#           :subject => pattern.subject || :s,
+#           :predicate => pattern.predicate || :p,
+#           :object => pattern.object || :o,
+#           :context => pattern.context || nil
+#         }
+#         super(RDF::Query::Pattern.new(h), &block)
+#       when Array
+#         h = {
+#           :subject => pattern[0] || :s,
+#           :predicate => pattern[1] || :p,
+#           :object => pattern[2]  || :o,
+#           :context => pattern[3]  || nil
+#         }
+#         super(RDF::Query::Pattern.new(h), &block)
+#       when Hash
+#         pattern[:subject] ||= :s
+#         pattern[:predicate] ||= :p
+#         pattern[:object] ||= :o
+#         super(RDF::Query::Pattern.new(pattern), &block)
+#       else
+#         super(pattern, &block)
+#       end
+#     end
 
     def query_pattern(pattern, &block)
-      context = pattern.context || nil
+      pattern = pattern.dup
+      pattern.subject ||= RDF::Query::Variable.new
+      pattern.predicate ||= RDF::Query::Variable.new
+      pattern.object ||= RDF::Query::Variable.new
+      pattern.context ||= nil
       str = pattern.to_s
       q = ""
-      if context
-        q = "CONSTRUCT { #{str} } WHERE { GRAPH <#{context}> { #{str} } } "
+      if pattern.context
+        q = "CONSTRUCT { #{str} } WHERE { GRAPH <#{pattern.context}> { #{str} } } "
       else
         q = "CONSTRUCT { #{str} } WHERE { #{str} } "
       end
@@ -224,7 +228,7 @@ module RDF::FourStore
         if block_given?
           result.each_statement(&block)
         else
-          result
+          result.solutions.to_a.extend(RDF::Enumerable, RDF::Queryable)
         end
       end
     end
