@@ -1,5 +1,5 @@
-require 'spec'
-require 'spec/rake/spectask'
+require 'rspec'
+require 'rspec/core/rake_task'
 
 task :default => [:spec]
 
@@ -26,21 +26,20 @@ end
 
 desc 'Run specs'
 task :spec => ["4store:init", "4store:start"] do
-  Spec::Rake::SpecTask.new do |t|
-    t.spec_files = FileList[File.join("spec", "*.spec")]
-    t.spec_opts = ["-fs", "-c", "-f", "h:report.html"]
-    #t.spec_opts = ["-fs", "-c"]
+  RSpec::Core::RakeTask.new do |t|
+    t.pattern = 'spec/**/*.spec'
+    #t.rspec_opts = ["-fs", "-c", "-f", "h:report.html"]
+    t.rspec_opts = ["-fs", "-c"]
     t.rcov = true
-    #t.rcov_opts = ["-x", "/Library", "-x", "spec"]
   end
 end
 
 desc 'Run specs with backtrace'
 task :tracespec => ["4store:init", "4store:start"] do
-  Spec::Rake::SpecTask.new do |t|
-    t.spec_files = FileList[File.join("spec", "*.spec")]
+  RSpec::Core::RakeTask.new do |t|
+    t.pattern = 'spec/**/*.spec'
+    t.rspec_opts = ["-bcfn"]
     t.rcov = false
-    t.spec_opts = ["-bcfn"]
   end
 end
 
