@@ -1,7 +1,13 @@
-require 'rspec'
-require 'rspec/core/rake_task'
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
-task :default => [:spec]
+require 'rspec/core'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = FileList['spec/**/*_spec.rb']
+end
+
+task :default => :spec
 
 namespace "4store" do
   kbname = "rdf4storetest"
@@ -41,11 +47,6 @@ task :tracespec => ["4store:init", "4store:start"] do
     t.rspec_opts = ["-bcfn"]
     t.rcov = false
   end
-end
-
-desc "Build the rdf-4store-#{File.read('VERSION').chomp}.gem file"
-task :build do
-  sh "gem build .gemspec"
 end
 
 task :clean do
