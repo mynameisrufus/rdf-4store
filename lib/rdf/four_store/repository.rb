@@ -1,324 +1,162 @@
-require 'net/http'
-require 'uri'
-require 'open-uri'
-require 'enumerator'
-require 'rdf'
 require 'sparql/client'
-require 'nokogiri'
+require 'rdf/four_store/client'
+require 'rdf/four_store/query'
 
-module RDF::FourStore
-
-  ##
-  # RDF::Repository backend for 4store
-  #
-  # @see http://4store.org
-  # @see 
-  class Repository < ::SPARQL::Client::Repository
-
-    attr_reader :endpointURI, :dataURI, :updateURI, :statusURI, :sizeURI
-
-    DEFAULT_CONTEXT = "default:".freeze
-
+module RDF
+  module FourStore
     ##
-    # Constructor of RDF::FourStore::Repository
+    # RDF::Repository backend for 4store
     #
-    # @param [String] uri
-    # @param [Hash] options
-    # @return [RDF::FourStore::Repository]
-    # @example
-    #    RDF::FourStore::Respository.new('http://localhost:8080')
-    #
-    def initialize(uri_or_options = {})
-      case uri_or_options
-      when String
-        @options = {}
-        @uri = uri_or_options.to_s
-      when Hash
-        @options = uri_or_options.dup
-        @uri = @options.delete([:uri])
-      else
-        raise ArgumentError, "expected String or Hash, but got #{uri_or_options.inspect}"
-      end
-      @uri.sub!(/\/$/, '')
-      @endpointURI = @uri + "/sparql/"
-      @dataURI = @uri + "/data/"
-      @updateURI = @uri + "/update/"
-      @statusURI = @uri + "/status/"
-      @sizeURI = @statusURI + "size/"
+    # @see http://4store.org
+    # @see
+    class Repository < ::SPARQL::Client::Repository
 
-      super(@endpointURI, options)
-    end
+      DEFAULT_CONTEXT = "default:".freeze
 
-    ##
-    # Loads RDF statements from the given file or URL into `self`.
-    #
-    # @see RDF::Mutable#load
-    # @param  [String, #to_s]          filename
-    # @param  [Hash{Symbol => Object}] options
-    # @return [void]
-    def load(filename, options = {})
-      return super(filename, options) if /^https?:\/\//.match(filename)
-
-      uri = nil
-
-      if options[:context]
-        uri = @dataURI + options[:context]
-      else
-        uri = @dataURI + 'file://' + File.expand_path(filename)
+      def initialize endpoint, options = {}
+        @options = options.dup
+        @client = Client.new endpoint, options
       end
 
-      uri = URI.parse(uri)
-      content = open(filename).read
-      begin
-        req = Net::HTTP::Put.new(uri.path)
-        Net::HTTP.start(uri.host, uri.port) do |http|
-          http.request(req, content)
-        end
-      rescue Errno::ECONNREFUSED, Errno::ECONNRESET, TimeoutError
-        retry
+      ##
+      # Loads RDF statements from the given file or URL into `self`.
+      #
+      # @see RDF::Mutable#load
+      # @param  [String, #to_s]          filename
+      # @param  [Hash{Symbol => Object}] options
+      # @return [void]
+      def load filename, options = {}
+        @client.load filename, options
       end
-    end
 
-    alias_method :load!, :load
+      alias_method :load!, :load
 
-    ##
-    # Returns the number of statements in this repository.
-    # @see RDF::Repository#count
-    # @return [Integer]
-    def count
-      c = 0
-      doc = Nokogiri::HTML(open(@sizeURI))
-      doc.search('tr').each do |tr|
-        td = tr.search('td')
-        c = td[0].content if td[0]
+      ##
+      # Returns the number of statements in this repository.
+      #
+      # @return [Integer]
+      # @see    RDF::Repository#count?
+      def count
+        binding = client.query("SELECT (COUNT(*) AS ?no) { ?s ?p ?o  }").first.to_hash
+        binding[binding.keys.first].value.to_i
       end
-      c.to_i # the last one is the total number
-    end
-    alias_method :size, :count
-    alias_method :length, :count
 
-    ##
-    # Enumerates each RDF statement in this repository.
-    #
-    # @yield  [statement]
-    # @yieldparam [RDF::Statement] statement
-    # @return [Enumerator]
-    # @see    RDF::Repository#each
-    # @see    SPARQL::Client::Rpository#each
-    def each(&block)
-      unless block_given?
-        RDF::Enumerator.new(self, :each)
-      else
-        # TODO: check why @client.construct does not work here.
-        statements = @client.query("CONSTRUCT { ?s ?p ?o } WHERE { ?s ?p ?o }")
-        statements.each_statement(&block) if statements
+      alias_method :size, :count
+
+      ##
+      # @private
+      # @see RDF::Enumerable#has_triple?
+      def has_triple?(triple)
+        has_statement?(RDF::Statement.from(triple))
       end
-    end
 
-    ##
-    # @private
-    # @see RDF::Enumerable#has_triple?
-    def has_triple?(triple)
-      has_statement?(RDF::Statement.from(triple))
-    end
-
-    ##
-    # @private
-    # @see RDF::Enumerable#has_quad?
-    def has_quad?(quad)
-      has_statement?(RDF::Statement.new(quad[0], quad[1], quad[2], :context => quad[3]))
-    end
-
-    ##
-    # @private
-    # @see RDF::Enumerable#has_statement?
-    def has_statement?(statement)
-      context = statement.context
-      dump = dump_statement(statement)
-      if context
-        @client.query("ASK { GRAPH <#{context}> { #{dump} } } ")
-      else
-        @client.query("ASK { #{dump} } ")
+      ##
+      # @private
+      # @see RDF::Enumerable#has_quad?
+      def has_quad?(quad)
+        has_statement?(RDF::Statement.new(quad[0], quad[1], quad[2], :context => quad[3]))
       end
-    end
 
-    ##
-    # @see RDF::Mutable#insert_statement
-    # @private
-    def insert_statement(statement)
-      unless has_statement?(statement)
+      ##
+      # @private
+      # @see RDF::Enumerable#has_statement?
+      def has_statement?(statement)
+        context = statement.context
         dump = dump_statement(statement)
-        post_data(dump, statement.context)
-      end
-    end
-
-    ##
-    # @see RDF::Mutable#delete_statement
-    # @private
-    def delete_statement(statement)
-      if has_statement?(statement)
-        context = statement.context || DEFAULT_CONTEXT
-        dump = dump_statement(statement)
-        q = "DELETE DATA { GRAPH <#{context}> { #{dump} } }"
-        post_update(q, context)
-      end
-    end
-
-    ##
-    # @private
-    # @see RDF::Mutable#clear
-    def clear_statements
-      q = "SELECT ?g WHERE { GRAPH ?g { ?s ?p ?o . } FILTER (?g != <#{DEFAULT_CONTEXT}>) }"
-      @client.query(q).each do |solution|
-        post_update("CLEAR GRAPH <#{solution[:g]}>") 
-      end
-      post_update("CLEAR GRAPH <#{DEFAULT_CONTEXT}>") 
-    end
-
-    ##
-    # Queries `self` for RDF statements matching the given `pattern`.
-    #
-    # @param  [Query, Statement, Array(Value), Hash] pattern
-    # @yield  [statement]
-    # @yieldparam [Statement]
-    # @return [Enumerable<Statement>]
-#     def query(pattern, &block)
-#       case pattern
-#       when RDF::Statement
-#         h = {
-#           :subject => pattern.subject || :s,
-#           :predicate => pattern.predicate || :p,
-#           :object => pattern.object || :o,
-#           :context => pattern.context || nil
-#         }
-#         super(RDF::Query::Pattern.new(h), &block)
-#       when Array
-#         h = {
-#           :subject => pattern[0] || :s,
-#           :predicate => pattern[1] || :p,
-#           :object => pattern[2]  || :o,
-#           :context => pattern[3]  || nil
-#         }
-#         super(RDF::Query::Pattern.new(h), &block)
-#       when Hash
-#         pattern[:subject] ||= :s
-#         pattern[:predicate] ||= :p
-#         pattern[:object] ||= :o
-#         super(RDF::Query::Pattern.new(pattern), &block)
-#       else
-#         super(pattern, &block)
-#       end
-#     end
-
-    def query_pattern(pattern, &block)
-      pattern = pattern.dup
-      pattern.subject ||= RDF::Query::Variable.new
-      pattern.predicate ||= RDF::Query::Variable.new
-      pattern.object ||= RDF::Query::Variable.new
-      pattern.context ||= nil
-      str = pattern.to_s
-      q = ""
-      if pattern.context
-        q = "CONSTRUCT { #{str} } WHERE { GRAPH <#{pattern.context}> { #{str} } } "
-      else
-        q = "CONSTRUCT { #{str} } WHERE { #{str} } "
-      end
-      result = @client.query(q)
-      if result
-        if block_given?
-          result.each_statement(&block)
+        if context
+          @client.query("ASK { GRAPH <#{context}> { #{dump} } } ")
         else
-          result.solutions.to_a.extend(RDF::Enumerable, RDF::Queryable)
+          @client.query("ASK { #{dump} } ")
         end
       end
-    end
 
-    ##
-    # Makes a RDF string from a RDF Statement
-    #
-    # @param [RDF::Statement] statement
-    # @return [String]
-    def dump_statement(statement)
-      dump_statements([statement])
-    end
+      ##
+      # @see RDF::Mutable#insert_statement
+      # @private
+      def insert_statement(statement)
+        unless has_statement?(statement)
+          dump = dump_statement(statement)
+          @client.add(dump, statement.context || DEFAULT_CONTEXT)
+        end
+      end
 
-    ##
-    # Makes a RDF string from RDF Statements
-    # Blank nodes are quoted to be used as constants in queries
-    #
-    # @param [Array(RDF::Statement)] statements
-    # @return [String]
-    # @see http://4store.org/presentations/bbc-2009-09-21/slides.html#(38)
-    def dump_statements(statements)
-      graph = RDF::Graph.new
-      graph.insert_statements(statements)
-      dump = RDF::Writer.for(:ntriples).dump(graph)
-      dump.gsub(/(_:\w+?) /, "<#{DEFAULT_CONTEXT}\\1> ")
-    end
+      ##
+      # @see RDF::Mutable#delete_statement
+      # @private
+      def delete_statement(statement)
+        if has_statement?(statement)
+          context = statement.context || DEFAULT_CONTEXT
+          dump = dump_statement(statement)
+          q = "DELETE DATA { GRAPH <#{context}> { #{dump} } }"
+          @client.set(q, context)
+        end
+      end
 
-    ##
-    # Uploads a RDF string to a repository
-    # @param [String] content
-    # @param [String] context
-    def post_data(content, context = nil)
-      context ||= DEFAULT_CONTEXT
-      uri = URI.parse(@dataURI)
+      ##
+      # @private
+      # @see RDF::Mutable#clear
+      def clear_statements
+        q = "SELECT ?g WHERE { GRAPH ?g { ?s ?p ?o . } FILTER (?g != <#{DEFAULT_CONTEXT}>) }"
+        @client.query(q).each do |solution|
+          @client.set("CLEAR GRAPH <#{solution[:g]}>", DEFAULT_CONTEXT) 
+        end
+        @client.set("CLEAR GRAPH <#{DEFAULT_CONTEXT}>", DEFAULT_CONTEXT) 
+      end
 
-      req = Net::HTTP::Post.new(uri.path)
-      req.form_data = {
-        'data' => content,
-        'graph' => context,
-        'mime-type' => 'application/x-turtle'
-      }
+      ##
+      # Makes a RDF string from a RDF Statement
+      #
+      # @param [RDF::Statement] statement
+      # @return [String]
+      def dump_statement(statement)
+        dump_statements([statement])
+      end
 
-      Net::HTTP.start(uri.host, uri.port) do |http|
-        http.request(req)
+      ##
+      # Makes a RDF string from RDF Statements
+      # Blank nodes are quoted to be used as constants in queries
+      #
+      # @param [Array(RDF::Statement)] statements
+      # @return [String]
+      # @see http://4store.org/presentations/bbc-2009-09-21/slides.html#(38)
+      def dump_statements(statements)
+        graph = RDF::Graph.new
+        graph.insert_statements(statements)
+        dump = RDF::Writer.for(:ntriples).dump(graph)
+        dump.gsub(/(_:\w+?) /, "<#{DEFAULT_CONTEXT}\\1> ")
+      end
+
+      def supports?(feature)
+        case feature.to_sym
+          when :context   then true   # statement contexts / named graphs
+          when :inference then false  # forward-chaining inference
+          else false
+        end
+      end
+
+      ## 
+      # @private
+      # @see RDF::Writable#writable?
+      # @return [Boolean]
+      def writable?
+        true
+      end
+
+      ## 
+      # @private
+      # @see RDF::Durable#durable?
+      # @return [Boolean]
+      def durable?
+        true
+      end
+      
+      ## 
+      # @private
+      # @see RDF::Countable#empty?
+      # @return [Boolean]
+      def empty?
+        count.zero?
       end
     end
-
-    ##
-    # Sends a SPARUL query to update content in a repository
-    # @param [String] query
-    # @param [String] context
-    def post_update(query, context = nil)
-      context ||= DEFAULT_CONTEXT
-      uri = URI.parse(@updateURI)
-
-      req = Net::HTTP::Post.new(uri.path)
-      req.form_data = {
-        'update' => query,
-        'graph' => context,
-        'content-type' => 'triples',
-      }
-
-      Net::HTTP.start(uri.host, uri.port) do |http|
-        http.request(req)
-      end
-    end
-
-    ## 
-    # @private
-    # @see RDF::Writable#writable?
-    # @return [Boolean]
-    def writable?
-      true
-    end
-
-    ## 
-    # @private
-    # @see RDF::Durable#durable?
-    # @return [Boolean]
-    def durable?
-      true
-    end
-    
-    ## 
-    # @private
-    # @see RDF::Countable#empty?
-    # @return [Boolean]
-    def empty?
-      count.zero?
-    end
-
   end
 end

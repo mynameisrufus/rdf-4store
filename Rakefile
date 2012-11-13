@@ -3,6 +3,7 @@ Bundler::GemHelper.install_tasks
 
 require 'rspec/core'
 require 'rspec/core/rake_task'
+
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
@@ -34,25 +35,6 @@ desc 'Run specs'
 task :spec => ["4store:init", "4store:start"] do
   RSpec::Core::RakeTask.new do |t|
     t.pattern = 'spec/**/*.spec'
-    #t.rspec_opts = ["-fs", "-c", "-f", "h:report.html"]
     t.rspec_opts = ["-fs", "-c"]
-    t.rcov = true
   end
-end
-
-desc 'Run specs with backtrace'
-task :tracespec => ["4store:init", "4store:start"] do
-  RSpec::Core::RakeTask.new do |t|
-    t.pattern = 'spec/**/*.spec'
-    t.rspec_opts = ["-bcfn"]
-    t.rcov = false
-  end
-end
-
-task :clean do
-  rm_f "*~"
-  rm_f "rdf-4store*.gem"
-  rm_f "*/*~"
-  rm_rf "report.html"
-  rm_rf "coverage"
 end

@@ -4,13 +4,9 @@ This is an [RDF.rb][] storage adapter that allows you to use the [4store][] RDF 
 
 See <http://blog.datagraph.org/2010/04/rdf-repository-howto> for an overview.
 
-## Status
-
-This is still in alpha status, don't use in production environment.
-
 ## Requirements
 
-This plugin depends on the unsafe mode of 4s-httpd. 
+This gem depends on the unsafe mode of 4s-httpd. 
 
     $ 4s-backend demo
     $ 4s-httpd -U -s -1 demo
@@ -29,6 +25,7 @@ Please post questions or feedback to the [W3C-ruby-rdf mailing list][].
 ### Author
 
  * Fumihiro Kato <fumi@fumi.me> | <http://github.com/fumi> | <http://fumi.me>
+ * Rufus Post <rufuspost@gmail.com> | <http://github.com/mynameisrufus>
 
 ### 'License'
 

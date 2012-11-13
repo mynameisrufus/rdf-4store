@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.description        = 'RDF.rb plugin providing 4store storage adapter.'
   gem.rubyforge_project  = 'rdf'
 
-  gem.authors            = ['Fumihiro Kato']
+  gem.authors            = ['Fumihiro Kato', 'Rufus Post']
   gem.email              = 'fumi@fumi.me'
 
   gem.platform           = Gem::Platform::RUBY
@@ -28,10 +28,12 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version      = '>= 1.9.2'
   gem.requirements               = ['4store 1.1.4 or greater']
-  gem.add_development_dependency 'rdf-spec',      '>= 0.3.8'
-  gem.add_development_dependency 'rspec',         '>= 2.11.0'
-  gem.add_runtime_dependency     'rdf',           '>= 0.3.8'
-  gem.add_runtime_dependency     'nokogiri',      '>= 1.5.5'
-  gem.add_runtime_dependency     'sparql-client', '>= 0.3.0'
+  gem.requirements               = ['raptor 2.0.8 or greater']
+  gem.add_development_dependency 'rspec',          '>= 2.11.0'
+  gem.add_development_dependency 'rdf-spec',       '>= 0.3.8'
+  gem.add_runtime_dependency     'rdf',            '>= 0.3.9'
+  gem.add_runtime_dependency     'linkeddata',     '>= 0.3.5'
+  gem.add_runtime_dependency     'sparql-client',  '>= 0.3.0'
+  gem.add_runtime_dependency     'equivalent-xml', '>= 0.3.0'
   gem.post_install_message       = nil
 end
