@@ -18,7 +18,7 @@ module RDF
         "/status/"
       end
 
-      def get query, headers = {}, &block
+      def request query, headers = {}, &block
         request = Net::HTTP::Post.new sparql_uri, @headers.merge(headers)
         request.set_form_data({
           'query' => query.to_s,
